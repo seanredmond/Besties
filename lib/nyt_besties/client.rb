@@ -12,10 +12,12 @@ module NytBesties
     # @return Client A new instance of Client
     def initialize(api_key)
       @api_key = api_key
-      @conn = get_connection
+      @conn = Faraday.new
     end
 
-    # Get the names of all Best-Seller Lists ({http://developer.nytimes.com/docs/read/best_sellers_api#h3-list-names api documention})
+    # Get the names of all Best-Seller Lists
+    # ({http://developer.nytimes.com/docs/read/best_sellers_api#h3-list-names
+    # api documention})
     def lists
       get_endpoint('lists/names')
     end
@@ -25,11 +27,6 @@ module NytBesties
       puts "#{@@api}/#{path}.json"
       response = @conn.get "#{@@api}/#{path}.json", params
       JSON.parse(response.body)['results']
-    end
-
-    private
-    def get_connection
-      Faraday.new
     end
   end
 end
