@@ -23,7 +23,20 @@ module NytBesties
       get_endpoint('lists/names').map{|l| NytBesties::ListName.new(l, self)}
     end
 
+    # Get one best-seller list
+    # ({http://developer.nytimes.com/docs/read/best_sellers_api#h3-list api 
+    # documentation})
+    # @param name [String] The name of the desired list. Names can be 
+    #    retrieved via {#lists}
+    # @param date [Date] Date of the list to be retrieved. Defaults to today.
+    # @param options [Hash] Options to be passed to the API.
+    # @return [Array<NytBesties::BestSellers>] An array of BestSellers objects
+    def list(name, date=Date.today, options={})
+      get_endpoint("lists/#{date.to_s}/#{name}")
+    end
+
     private
+    # Retrieves data from the API
     def get_endpoint(path, params = {})
       params.merge!({'api-key' => @api_key})
       puts "#{@@api}/#{path}.json"

@@ -1,3 +1,4 @@
+require "date"
 require "faraday"
 require "json"
 require "nyt_besties/client"
