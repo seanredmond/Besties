@@ -32,8 +32,8 @@ module NytBesties
     # @param options [Hash] Options to be passed to the API.
     # @return [Array<NytBesties::BestSellers>] An array of BestSellers objects
     def list(name, date=Date.today, options={})
-      get_endpoint("lists/#{date.to_s}/#{name}")
-        .map{|l| NytBesties::BestSellers.new(l, self)}
+      get_endpoint("lists/#{date.to_s}/#{name}").
+        map{|l| NytBesties::BestSellers.new(l, self)}
     end
 
     private
