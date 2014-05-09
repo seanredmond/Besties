@@ -944,3 +944,49 @@ LIST_RESPONSE = %q<
     "status": "OK"
 }
 >
+
+BOOK_RESPONSE = %q<
+{
+    "asterisk": 0,
+    "bestsellers_date": "2014-04-26",
+    "book_details": [
+        {
+            "age_group": "",
+            "author": "Francine Prose",
+            "book_image": null,
+            "contributor": "by Francine Prose",
+            "contributor_note": "",
+            "description": "The lives of artists and libertines intersect at a venue for cross-dressing men and women.\u00a0",
+            "price": 0,
+            "primary_isbn10": "0061713783",
+            "primary_isbn13": "9780061713781",
+            "publisher": "Harper",
+            "title": "LOVERS AT THE CHAMELEON CLUB , PARIS 1932"
+        }
+    ],
+    "dagger": 0,
+    "display_name": "Hardcover Fiction",
+    "isbns": [
+        {
+            "isbn10": "0061713783",
+            "isbn13": "9780061713781"
+        }
+    ],
+    "list_image": "9781455521203.jpeg",
+    "list_name": "Hardcover Fiction",
+    "normal_list_ends_at": 16,
+    "published_date": "2014-05-11",
+    "rank": 14,
+    "rank_last_week": 0,
+    "reviews": [
+        {
+            "article_chapter_link": "",
+            "book_review_link": "",
+            "first_chapter_link": "",
+            "sunday_review_link": ""
+        }
+    ],
+    "updated": "WEEKLY",
+    "weeks_on_list": 1
+}
+>

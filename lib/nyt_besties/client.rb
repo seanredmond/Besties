@@ -40,7 +40,6 @@ module NytBesties
     # Retrieves data from the API
     def get_endpoint(path, params = {})
       params.merge!({'api-key' => @api_key})
-      puts "#{@@api}/#{path}.json"
       response = @conn.get "#{@@api}/#{path}.json", params
       JSON.parse(response.body)['results']
     end
