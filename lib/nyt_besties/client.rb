@@ -1,13 +1,21 @@
 module NytBesties
+  # Handles all communication with the API server
   class Client
+    # The API version we understand
     @@version = 'v2'
+    # Root URL for all API calls
     @@api = "http://api.nytimes.com/svc/books/#{@@version}"
 
+    # Create your NYT Besties client
+    #
+    # @param [String] api_key Your API key.
+    # @return Client A new instance of Client
     def initialize(api_key)
       @api_key = api_key
       @conn = get_connection
     end
 
+    # Get the names of all Best-Seller Lists ({http://developer.nytimes.com/docs/read/best_sellers_api#h3-list-names api documention})
     def lists
       get_endpoint('lists/names')
     end
