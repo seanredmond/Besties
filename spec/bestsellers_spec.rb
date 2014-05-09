@@ -50,6 +50,12 @@ describe NytBesties::BestSellers do
       end
     end
   end
+
+  describe '#display_name' do
+    it "should return the name of the list" do
+      @best.display_name.should eq "Hardcover Fiction"
+    end
+  end
 end
 
 

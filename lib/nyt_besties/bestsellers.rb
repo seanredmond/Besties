@@ -29,5 +29,11 @@ module NytBesties
     def dagger?
       @data['dagger'] == 1
     end
+
+    # The display_name field shows the text label that is used on NYTimes.com. 
+    # @return [String]
+    def display_name
+      @data['display_name']
+    end
   end
 end
