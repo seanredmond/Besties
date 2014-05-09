@@ -12,5 +12,16 @@ module NytBesties
       @name = data['list_name']
       @display_name = data['display_name']
     end
+
+    # Return a version of the name for use in API calls
+    # 
+    # As the documentation states, "Be sure to replace spaces with hyphens 
+    # (e.g., e-book-fiction or hardcover-fiction, not E-Book Fiction or 
+    # Hardcover Fiction)."
+    # 
+    # @return [String] The api-call-ready name.
+    def api_name
+      @name.gsub(/\s/, '-')
+    end
   end
 end
