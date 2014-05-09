@@ -22,6 +22,7 @@ module NytBesties
       get_endpoint('lists/names')
     end
 
+    private
     def get_endpoint(path, params = {})
       params.merge!({'api-key' => @api_key})
       puts "#{@@api}/#{path}.json"
