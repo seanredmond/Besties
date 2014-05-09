@@ -22,5 +22,12 @@ module NytBesties
     def bestsellers_date
       Date.strptime(@data['bestsellers_date'], '%Y-%m-%d')
     end
+
+    # A dagger indicates that some bookstores have received bulk orders for 
+    # this book.
+    # @return [Boolean]
+    def dagger?
+      @data['dagger'] == 1
+    end
   end
 end

@@ -34,6 +34,22 @@ describe NytBesties::BestSellers do
       @best.bestsellers_date.to_s.should eq '2014-04-26'
     end
   end
+
+  describe "#dagger?" do 
+    it "has a dagger property" do
+      @best.dagger?.should be_false
+    end
+
+    context "when it does have a dagger" do
+      before :each do 
+        @best.data['dagger'] = 1
+      end
+
+      it "should return true" do
+        @best.dagger?.should be_true
+      end
+    end
+  end
 end
 
 
