@@ -57,7 +57,7 @@ describe NytBesties::Client do
         url = "#{@base}/#{today}/#{list}.json"
 
         @client.conn.should_receive(:get)
-          .with(url, kind_of(Hash)).and_return(@r)
+          .with(url, kind_of(Hash))
         @client.list('listname')
       end
 
