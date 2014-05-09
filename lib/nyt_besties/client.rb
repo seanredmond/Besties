@@ -18,8 +18,9 @@ module NytBesties
     # Get the names of all Best-Seller Lists
     # ({http://developer.nytimes.com/docs/read/best_sellers_api#h3-list-names
     # api documention})
+    # @return [Array<NytBesties::ListName>] An array of ListName objects
     def lists
-      get_endpoint('lists/names')
+      get_endpoint('lists/names').map{|l| NytBesties::ListName.new(l, self)}
     end
 
     private

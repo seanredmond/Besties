@@ -14,8 +14,10 @@ describe NytBesties::Client do
         and_return(@r)
     end
 
-    it 'does something' do
-      @client.lists.should be_an_instance_of(Array)
+    it 'Retrieves list names' do
+      l = @client.lists
+      l.should be_an_instance_of(Array)
+      l.first.should be_an_instance_of(NytBesties::ListName)
     end
   end
 end
