@@ -11,4 +11,4 @@ rvm:
   - jruby-18mode # JRuby in 1.8 mode
 addons:
    code_climate:
-     repo_token: 0cf1ec8cc5f26e7ba43e43f6acf51011d1f24bc7a1894e1e658a26ef35d2336
+     repo_token: 2dc77ff385cce2fd7af65f5fae6bae898aa056fcdea8230ad63fdede101b2f81
