@@ -33,6 +33,7 @@ module NytBesties
     # @return [Array<NytBesties::BestSellers>] An array of BestSellers objects
     def list(name, date=Date.today, options={})
       get_endpoint("lists/#{date.to_s}/#{name}")
+        .map{|l| NytBesties::BestSellers.new(l, self)}
     end
 
     private

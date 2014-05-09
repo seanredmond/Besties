@@ -42,8 +42,10 @@ describe NytBesties::Client do
 
     end
 
-    it "should return an Array" do
-      @client.list('listname').should be_an_instance_of(Array)
+    it "should return an Array of BestSellers objects" do
+      l = @client.list('listname')
+      l.should be_an_instance_of(Array)
+      l.first.should be_an_instance_of(NytBesties::BestSellers)
     end
 
     describe "date parameters" do
@@ -57,7 +59,7 @@ describe NytBesties::Client do
         url = "#{@base}/#{today}/#{list}.json"
 
         @client.conn.should_receive(:get)
-          .with(url, kind_of(Hash))
+          .with(url, kind_of(Hash)).and_return(@r)
         @client.list('listname')
       end
 
