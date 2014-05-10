@@ -8,6 +8,7 @@ module NytBesties
     def initialize(data, client)
       @data = data
       @client = client
+      @isbns = nil
     end
 
     # An asterisk indicates that a book's sales are barely distinguishable
@@ -34,6 +35,14 @@ module NytBesties
     # @return [String]
     def display_name
       @data['display_name']
+    end
+
+    def isbns
+      if @isbns.nil?
+        @isbns = @data['isbns'].map{|i| NytBesties::ISBN.new(i)}
+      end
+
+      @isbns
     end
 
     def list_image

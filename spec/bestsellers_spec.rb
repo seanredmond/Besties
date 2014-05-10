@@ -57,6 +57,13 @@ describe NytBesties::BestSellers do
     end
   end
 
+  describe '#isbns' do
+    it "should return an array of ISBN objects" do
+      @best.isbns.should be_an_instance_of Array
+      @best.isbns.first.should be_an_instance_of NytBesties::ISBN
+    end
+  end
+
   describe '#list_image' do
     it "should return the image name" do
       @best.list_image.should eq "9781455521203.jpeg"
