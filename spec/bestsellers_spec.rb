@@ -108,6 +108,22 @@ describe NytBesties::BestSellers do
       @best.rank_last_week.should eq 0
     end
   end
+
+  describe "#updated" do
+    it "should return the update frequency" do
+      @best.updated.should eq "WEEKLY"
+    end
+  end
+
+  describe "#weeks_on_list" do
+    it "should return an integer" do
+      @best.weeks_on_list.should be_an_instance_of Fixnum
+    end 
+
+    it "should return the number of weeks on the list" do
+      @best.weeks_on_list.should eq 1
+    end
+  end
 end
 
 

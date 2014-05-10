@@ -40,6 +40,8 @@ module NytBesties
       @data['list_image']
     end
 
+    # The name of the Times best-seller list.
+    # @returns [String]
     def list_name
       @data['list_name']
     end
@@ -61,8 +63,22 @@ module NytBesties
       @data['rank']
     end
 
+    # The rank of the best seller on list-name one week prior to 
+    # bestsellers-date
+    # @returns [Fixnum]
     def rank_last_week
       @data['rank_last_week']
+    end
+
+    def updated
+      @data['updated']
+    end
+
+    # The number of weeks that the best seller has been on list-name,
+    # as of bestsellers-date
+    # @returns [Fixnum]
+    def weeks_on_list
+      @data['weeks_on_list']
     end
   end
 end
