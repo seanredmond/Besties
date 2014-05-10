@@ -35,6 +35,17 @@ describe NytBesties::BestSellers do
     end
   end
 
+  describe "#book_details" do
+    it "returns an Array" do 
+      @best.book_details.should be_an_instance_of Array
+    end
+
+    it "returns an Array of BookDetails objects" do
+      @best.book_details.first.
+        should be_an_instance_of NytBesties::BookDetails
+    end
+  end
+
   describe "#dagger?" do 
     it "has a dagger property" do
       @best.dagger?.should be_false

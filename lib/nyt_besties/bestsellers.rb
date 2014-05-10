@@ -9,6 +9,7 @@ module NytBesties
       @data = data
       @client = client
       @isbns = nil
+      @details = nil
     end
 
     # An asterisk indicates that a book's sales are barely distinguishable
@@ -22,6 +23,14 @@ module NytBesties
     # @return [Date]
     def bestsellers_date
       Date.strptime(@data['bestsellers_date'], '%Y-%m-%d')
+    end
+
+    def book_details
+      if @details.nil?
+        @details = @data['book_details'].map{|d| BookDetails.new(d)}
+      end
+
+      @details
     end
 
     # A dagger indicates that some bookstores have received bulk orders for 
