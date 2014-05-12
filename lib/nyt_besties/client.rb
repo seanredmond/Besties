@@ -1,3 +1,4 @@
+require "pp"
 module NytBesties
   # Handles all communication with the API server
   class Client
@@ -33,6 +34,11 @@ module NytBesties
     # @return [Array<NytBesties::BestSellers>] An array of BestSellers objects
     def list(name, date=Date.today, options={})
       get_endpoint("lists/#{date.to_s}/#{name}").
+        map{|l| NytBesties::BestSellers.new(l, self)}
+    end
+
+    def history(options={})
+      get_endpoint("lists/best-sellers/history", options).
         map{|l| NytBesties::BestSellers.new(l, self)}
     end
 

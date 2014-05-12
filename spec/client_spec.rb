@@ -4,6 +4,14 @@ describe NytBesties::Client do
 
   before :each do
     @client = NytBesties::Client.new('12345')
+    # Monkey-patch Client object so we can mock the connection
+    def @client.conn=(c)
+      @conn = c
+    end
+
+    def @client.conn
+      @conn
+    end
   end
 
   describe "#lists" do
@@ -29,16 +37,6 @@ describe NytBesties::Client do
       @r = double(Faraday::Response, :body => LIST_RESPONSE, :headers => {})
       Faraday::Connection.any_instance.stub(:get).
         and_return(@r)
-
-      # Monkey-patch Client object so we can mock the connection
-      def @client.conn=(c)
-       @conn = c
-      end
-
-      def @client.conn
-        @conn
-      end
-
 
     end
 
@@ -71,6 +69,31 @@ describe NytBesties::Client do
           .with(url, kind_of(Hash)).and_return(@r)
         @client.list('listname', Date.new(2014, 1, 1))
       end
+    end
+  end
+
+  describe "#history" do
+    before :each do
+      @r = double(Faraday::Response, :body => HISTORY_RESPONSE, :headers => {})
+      Faraday::Connection.any_instance.stub(:get).
+        and_return(@r)
+    end
+
+    it "should pass on the parameters with which it was called" do
+      url ='http://api.nytimes.com/svc/books/v2/lists/best-sellers/history.json'
+      @client.conn.should_receive(:get)
+        .with(url, hash_including("title"=>"lovers at the chameleon club"))
+        .and_return(@r)
+      @client.history({'title' => 'lovers at the chameleon club'})
+    end
+
+    it "should return an array" do
+      @client.history({}).should be_an_instance_of Array
+    end
+
+    it "should return an Array of BestSellers objects" do
+      @client.history({}).first
+        .should be_an_instance_of NytBesties::BestSellers
     end
   end
 end
