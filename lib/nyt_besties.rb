@@ -6,6 +6,7 @@ require "nyt_besties/bookdetails"
 require "nyt_besties/client"
 require "nyt_besties/isbn"
 require "nyt_besties/listname"
+require "nyt_besties/rank"
 require "nyt_besties/version"
 
 

@@ -1,21 +1,11 @@
 module NytBesties
-  # A Best-sellers list
-  class BestSellers
-    # Create a new best-sellers list
+  # A ranking in a Best-sellers history
+  class Rank
+    # Create a new rank
     # @param data [Hash] Hash (parsed JSON) containing name data
-    # @param client [NytBesties::Client] A client. Most likely the client that 
-    #        retrieved the data for the list name.
-    def initialize(data, client)
+    def initialize(data)
       @data = data
-      @client = client
-      @isbns = nil
-      @details = nil
-      if @data.has_key?('ranks_history')
-        @ranks_history = @data['ranks_history']
-          .map{|h| NytBesties::Rank.new(h)}
-      else
-        @ranks_history = nil
-      end
+      @isbn = nil
     end
 
     # An asterisk indicates that a book's sales are barely distinguishable
@@ -31,14 +21,6 @@ module NytBesties
       Date.strptime(@data['bestsellers_date'], '%Y-%m-%d')
     end
 
-    def book_details
-      if @details.nil?
-        @details = @data['book_details'].map{|d| BookDetails.new(d)}
-      end
-
-      @details
-    end
-
     # A dagger indicates that some bookstores have received bulk orders for 
     # this book.
     # @return [Boolean]
@@ -52,26 +34,25 @@ module NytBesties
       @data['display_name']
     end
 
-    def isbns
-      if @isbns.nil?
-        @isbns = @data['isbns'].map{|i| NytBesties::ISBN.new(i)}
+    # International Standard Book Number, 10 or 13 digits. A best seller may 
+    # have both 10-digit and 13-digit ISBNs, and may have multiple ISBNs of
+    # each type. 
+    # @returns [NytBesties::ISBN]
+    def primary_isbns
+      if @isbn.nil?
+        @isbn = ISBN.new({
+          'isbn10' => @data['primary_isbn10'],
+          'isbn13' => @data['primary_isbn13']
+        })
       end
 
-      @isbns
-    end
-
-    def list_image
-      @data['list_image']
+      @isbn
     end
 
     # The name of the Times best-seller list.
     # @returns [String]
     def list_name
       @data['list_name']
-    end
-
-    def normal_list_ends_at
-      @data['normal_list_ends_at']
     end
 
     # The date the best-seller list was published on NYTimes.com
@@ -87,30 +68,14 @@ module NytBesties
       @data['rank']
     end
 
-    # The rank of the best seller on list-name one week prior to 
-    # bestsellers-date
-    # @returns [Fixnum]
-    def rank_last_week
-      @data['rank_last_week']
-    end
-
-    def updated
-      @data['updated']
-    end
-
     # The number of weeks that the best seller has been on list-name,
     # as of bestsellers-date
     # @returns [Fixnum]
     def weeks_on_list
       @data['weeks_on_list']
     end
-
-    def has_history?
-      return (! @ranks_history.nil?)
-    end
-
-    def history
-      @ranks_history
-    end
   end
 end
+
+
+

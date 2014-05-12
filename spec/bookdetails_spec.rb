@@ -38,7 +38,7 @@ describe NytBesties::BookDetails do
   end
 
   describe "#description" do
-    it "returns a description note" do 
+    it "returns a description" do 
       @deets.description.should eq "The lives of artists and libertines intersect at a venue for cross-dressing men and women.\u00a0"
     end
   end
