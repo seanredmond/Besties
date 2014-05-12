@@ -65,7 +65,7 @@ module NytBesties
     end
 
     # The name of the Times best-seller list.
-    # @returns [String]
+    # @return [String]
     def list_name
       @data['list_name']
     end
@@ -75,21 +75,21 @@ module NytBesties
     end
 
     # The date the best-seller list was published on NYTimes.com
-    # @returns [Date]
+    # @return [Date]
     def published_date
       Date.strptime(@data['published_date'], '%Y-%m-%d')
     end
 
     # For each best seller on a list, various rank data is provided, including 
     # weeks_on_list and rank_last_week. Rank data is as of bestsellers_date.
-    # @returns [Fixnum]
+    # @return [Fixnum]
     def rank
       @data['rank']
     end
 
     # The rank of the best seller on list-name one week prior to 
     # bestsellers-date
-    # @returns [Fixnum]
+    # @return [Fixnum]
     def rank_last_week
       @data['rank_last_week']
     end
@@ -100,7 +100,7 @@ module NytBesties
 
     # The number of weeks that the best seller has been on list-name,
     # as of bestsellers-date
-    # @returns [Fixnum]
+    # @return [Fixnum]
     def weeks_on_list
       @data['weeks_on_list']
     end

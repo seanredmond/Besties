@@ -37,7 +37,7 @@ module NytBesties
     # International Standard Book Number, 10 or 13 digits. A best seller may 
     # have both 10-digit and 13-digit ISBNs, and may have multiple ISBNs of
     # each type. 
-    # @returns [NytBesties::ISBN]
+    # @return [NytBesties::ISBN]
     def primary_isbns
       if @isbn.nil?
         @isbn = ISBN.new({
@@ -50,27 +50,27 @@ module NytBesties
     end
 
     # The name of the Times best-seller list.
-    # @returns [String]
+    # @return [String]
     def list_name
       @data['list_name']
     end
 
     # The date the best-seller list was published on NYTimes.com
-    # @returns [Date]
+    # @return [Date]
     def published_date
       Date.strptime(@data['published_date'], '%Y-%m-%d')
     end
 
     # For each best seller on a list, various rank data is provided, including 
     # weeks_on_list and rank_last_week. Rank data is as of bestsellers_date.
-    # @returns [Fixnum]
+    # @return [Fixnum]
     def rank
       @data['rank']
     end
 
     # The number of weeks that the best seller has been on list-name,
     # as of bestsellers-date
-    # @returns [Fixnum]
+    # @return [Fixnum]
     def weeks_on_list
       @data['weeks_on_list']
     end
